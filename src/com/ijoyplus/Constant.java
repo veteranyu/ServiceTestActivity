@@ -12,6 +12,7 @@ public class Constant {
     public static final String TEMPMAIL = "T_gcagia";
     
     public  static int TESTINDEX = 3;
+    public static int TESTITEM = 4;
     public  static final String PROD_ID = "6315";
     public static String[][] m_URL = {
     	    { "kAppKey  ", BASE_URL +"ijoyplus_ios_001","POST" },

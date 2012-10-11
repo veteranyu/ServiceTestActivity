@@ -88,23 +88,41 @@ public class ServiceTestActivity extends Activity {
         }
     };
     public void OnHttpResponse() throws ClientProtocolException, IOException, JSONException { 
+    	TextView tv = (TextView)findViewById(R.id.textView1);
     	HttpClient httpClient = new DefaultHttpClient();
     	int i = Constant.TESTINDEX;
+    	int TestTotleNumber = 0;
     	Log.i(TAG," -- OnHttpResponse begain");
+    	 tv.setText( "\n  Wait for a minute... ");
     	while(i<Constant.m_URL.length){
-    		if(Constant.m_URL[i][2].indexOf("POST") != -1){
-    			OnHttpPost(httpClient,i);
+    		if(  Constant.TESTITEM ==-1){ // test all
+    			if(Constant.m_URL[i][2].indexOf("POST") != -1){
+    				OnHttpPost(httpClient,i);
     			
+    			}
+    			else if(Constant.m_URL[i][2].indexOf("GET") != -1){
+    				OnHttpGet(httpClient,i);
+    			}
+    			TestTotleNumber ++;
     		}
-    		else if(Constant.m_URL[i][2].indexOf("GET") != -1){
-    			OnHttpGet(httpClient,i);
+    		else{ // only test one item
+    			if(i==Constant.TESTINDEX  || i==Constant.m_URL.length -1 || i ==Constant.TESTITEM){
+    				if(Constant.m_URL[i][2].indexOf("POST") != -1){
+        				OnHttpPost(httpClient,i);
+        			
+        			}
+        			else if(Constant.m_URL[i][2].indexOf("GET") != -1){
+        				OnHttpGet(httpClient,i);
+        			}
+        			TestTotleNumber ++;
+    			}
     		}
     		i++;
     	}
-    	String strTotle = "\nTotle test services:\n"+ String.valueOf( i +1 -Constant.TESTINDEX );
+    	String strTotle = "\nTotle test services:\n"+ String.valueOf( TestTotleNumber );
     	 appendLog(strTotle);
-    	 TextView tv = (TextView)findViewById(R.id.textView1);
-         tv.setText(strTotle + "\n ijoyplus service test end, Please check your"+ Constant.OUTPUTFILE + "file in sdcard!");
+    	 
+         tv.setText(strTotle + "\n ijoyplus service test end, Please check  \""+ Constant.OUTPUTFILE + "\"  in your sdcard!");
     	//Toast.makeText(getApplicationContext(), "ijoyplus service test end, Please find test log file in sdcard!", Toast.LENGTH_SHORT).show();
     }
     	   public void OnHttpPost(HttpClient httpClient,int index) throws ClientProtocolException, IOException, JSONException {  
