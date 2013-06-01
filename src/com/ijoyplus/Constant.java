@@ -1,8 +1,9 @@
 package com.ijoyplus;
 
 public class Constant {
+    //error
     public static final String BASE_URL =
-            "http://115.239.196.123/joyplus-service/index.php/";
+            "http://*/joyplus-service/index.php/";
     public static final String WIKTIONARY_PAGE2 =
             "http://www.baidu.com";
     public static final String OUTPUTFILE ="sdcard/log.txt";
